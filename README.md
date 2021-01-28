@@ -78,7 +78,7 @@ Getting the blueprint
 git clone git@github.com:kanisterio/kanister.git
 kubectl apply -f kanister/examples/stable/mysql/mysql-blueprint.yaml 
 kubectl get blueprint
-``
+```
 
 ** Backup
 ```
