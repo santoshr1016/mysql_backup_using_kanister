@@ -34,8 +34,8 @@ root@mysql-0:/# mysql -p
 mysql> CREATE DATABASE test;
 mysql> USE test;
 mysql> CREATE TABLE pets (name VARCHAR(20), species VARCHAR(20));
-mysql> INSERT INTO pets VALUES ('flare', 'dog');
-mysql> INSERT INTO pets VALUES ('reno', 'dog');
+mysql> INSERT INTO pets VALUES ('bingo', 'dog');
+mysql> INSERT INTO pets VALUES ('kalu', 'dog');
 mysql> SELECT * FROM pets;
 +-------+---------+
 | name  | species |
