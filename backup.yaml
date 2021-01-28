@@ -1,0 +1,17 @@
+apiVersion: cr.kanister.io/v1alpha1
+kind: ActionSet
+metadata:
+  name: backup
+  namespace: kanister
+spec:
+  actions:
+  - blueprint: mysql-blueprint
+    name: backup
+    object:
+      kind: statefulset
+      name: mysql
+      namespace: default
+    profile:
+      name: s3-profile
+      namespace: kanister
+

@@ -1,0 +1,21 @@
+apiVersion: cr.kanister.io/v1alpha1
+kind: Profile
+metadata:
+  name: s3-profile
+  namespace: kanister
+location:
+  type: s3Compliant
+  bucket: kanister
+  endpoint: http://minio.minio.svc:9000
+credential:
+  type: keyPair
+  keyPair:
+    idField: minio_access_key_id
+    secretField: minio_secret_access_key
+    secret:
+      apiVersion: v1
+      kind: Secret
+      name: minio-secret
+      namespace: kanister
+skipSSLVerify: true
+
