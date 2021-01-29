@@ -1,12 +1,16 @@
 apiVersion: cr.kanister.io/v1alpha1
 kind: ActionSet
 metadata:
-  name: backup
+  name: restore
   namespace: kanister
 spec:
   actions:
-  - blueprint: mysql-blueprint
-    name: backup
+  - name: restore
+    artifacts:
+      mysqlCloudDump:
+        keyValue:
+          s3path: /mysql-backups/default/mysql/2021-01-29T06-18-48/dump.sql.gz
+    blueprint: mysql-blueprint
     object:
       kind: statefulset
       name: mysql

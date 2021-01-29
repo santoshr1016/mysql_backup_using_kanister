@@ -1,7 +1,17 @@
 apiVersion: v1
+kind: Secret
+metadata:
+  name: mysql
+  namespace: default
+type: Opaque
+data:
+  mysql-root-password: cXcxMjM=
+---
+apiVersion: v1
 kind: Service
 metadata:
   name: mysql
+  namespace: default
 spec:
   ports:
   - port: 3306
@@ -13,6 +23,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: mysql
+  namespace: default
   labels:
     app.kubernetes.io/name: mysql
     app.kubernetes.io/instance: mysql
@@ -24,6 +35,7 @@ spec:
       app: mysql
   template:
     metadata:
+      namespace: default
       labels:
         app: mysql
     spec:

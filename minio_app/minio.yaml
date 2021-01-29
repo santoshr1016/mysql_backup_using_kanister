@@ -1,7 +1,13 @@
 apiVersion: v1
+kind: Namespace
+metadata:
+  name: minio
+---
+apiVersion: v1
 kind: Service
 metadata:
   name: minio
+  namespace: minio
 spec:
   ports:
   - port: 9000
@@ -13,6 +19,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: minio-pvc
+  namespace: minio
 spec:
   accessModes:
     - ReadWriteOnce
@@ -23,6 +30,7 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
+  namespace: minio
   name: minio
 spec:
   serviceName: "minio"
@@ -32,6 +40,7 @@ spec:
       app: minio
   template:
     metadata:
+      namespace: minio
       labels:
         app: minio
     spec:
