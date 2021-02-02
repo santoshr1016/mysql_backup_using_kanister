@@ -3,7 +3,7 @@ Setting up the S3 replacement minio storage, it is hosted locally
 ```
 cd minio_app
 kubectl create -f minio.yaml
-kubectl port-forward -n minio svc/minio 9000:9000 
+kubectl -n minio port-forward -n minio svc/minio 9000:9000 
 http://localhost:9000
 user: minio
 paswd: minio123
@@ -17,7 +17,7 @@ Setting up the mysql database
 cd mysql_app
 kubectl create -f mysql.yaml
 kubectl -n default exec -it mysql-0 -- bash
-root@mysql-0:/# mysql -p    
+root@mysql-0:/# mysql -pqw123    
 
 ...
 mysql> CREATE DATABASE test;
@@ -56,7 +56,7 @@ kubectl -n kanister get crd |grep kanister
 kubectl apply -f profile.yaml
 ```
 
-** How to get mysql profile
+** How to get mysql profile shown above
 ```
 Getting the blueprint
 
@@ -91,7 +91,7 @@ Note: Everytime you run backup, change the name of new backup in the yaml
 ** Disaster strikes!
 ```
 kubectl exec -ti mysql-0 -- bash
-root@mysql-0:/# mysql -p    
+root@mysql-0:/# mysql -pqw123    
 
 mysql> SHOW DATABASES;
 DROP DATABASE test;
@@ -116,8 +116,7 @@ Note: Everytime you run restore, change the name of the new restore in yaml
 
 ** Verify
 ```
-kubens default
-kubectl exec -ti mysql-0 -- bash
+kubectl -n default exec -ti mysql-0 -- bash
 mysql -p
 mysql> SHOW DATABASES;
 Your dropped tables should be here
@@ -125,7 +124,7 @@ Your dropped tables should be here
 ```
 
 ** Very Important.
-** Want to take backup again, delete the old actionset and re-apply
+** Want to take backup again, delete the old actionset and re-apply OR give another name to backup in the yaml file
 ```
 ➜  operations git:(main) ✗ k get actionsets.cr.kanister.io      
 NAME      AGE
@@ -138,3 +137,6 @@ restore   118s
 ➜  operations git:(main) ✗ k apply -f backup.yaml 
 ➜  operations git:(main) ✗ k apply -f restore.yaml 
 ```
+
+
+
